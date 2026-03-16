@@ -19,11 +19,15 @@ export default function DecryptedText({
   parentClassName = '',
   encryptedClassName = '',
   animateOn = 'hover',
+  initialDisplayText,
   ...props
 }) {
-  const [displayText, setDisplayText] = useState(text);
+  const [displayText, setDisplayText] = useState(initialDisplayText ?? text);
   const [isHovering, setIsHovering] = useState(false);
-  const [isScrambling, setIsScrambling] = useState(false);
+
+  useEffect(() => {
+    setDisplayText(initialDisplayText ?? text);
+  }, [initialDisplayText, text]);
 
   useEffect(() => {
     let interval;
@@ -70,13 +74,11 @@ export default function DecryptedText({
 
       if (currentIteration >= maxIterations) {
         clearInterval(interval);
-        setIsScrambling(false);
         setDisplayText(text);
       }
     };
 
-    if (isHovering && !isScrambling) {
-      setIsScrambling(true);
+    if (isHovering) {
       interval = setInterval(shuffleText, speed);
     }
 
@@ -92,7 +94,6 @@ export default function DecryptedText({
     revealDirection,
     useOriginalCharsOnly,
     characters,
-    isScrambling,
   ]);
 
   const hoverProps =
@@ -101,7 +102,7 @@ export default function DecryptedText({
           onMouseEnter: () => setIsHovering(true),
           onMouseLeave: () => {
             setIsHovering(false);
-            setDisplayText(text);
+            setDisplayText(initialDisplayText ?? text);
           },
         }
       : {};
@@ -112,17 +113,28 @@ export default function DecryptedText({
     }
   }, [animateOn]);
 
+  const displayLines = displayText.split('\n');
+  const textLines = text.split('\n');
+
   return (
     <span className={parentClassName} {...hoverProps} {...props}>
       <span className={className}>
-        {displayText.split('').map((char, index) => (
-          <span
-            key={index}
-            className={char !== text[index] ? encryptedClassName : ''}
-          >
-            {char}
-          </span>
-        ))}
+        {displayLines.map((line, lineIndex) => {
+          const targetLine = textLines[lineIndex] ?? '';
+
+          return (
+            <span key={lineIndex} className="block">
+              {line.split('').map((char, charIndex) => (
+                <span
+                  key={`${lineIndex}-${charIndex}`}
+                  className={char !== targetLine[charIndex] ? encryptedClassName : ''}
+                >
+                  {char}
+                </span>
+              ))}
+            </span>
+          );
+        })}
       </span>
     </span>
   );

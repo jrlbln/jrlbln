@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "hosting:build": "npm run build",
-    "hosting:deploy": "firebase deploy --only hosting"
+    "deploy": "firebase deploy --only hosting"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

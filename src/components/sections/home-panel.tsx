@@ -24,7 +24,7 @@ export function HomePanel({ onGoToPanel }: HomePanelProps) {
           <div className="flex min-h-[200px] items-center md:min-h-[220px]">
             <RoleRotator
               phrases={siteConfig.rotatingRoles}
-              className="max-w-[11.75ch] text-[clamp(3.2rem,5.2vw,5.1rem)] font-semibold leading-[0.92] tracking-[-0.09em] text-[var(--color-text)]"
+              className="w-[11.75ch] text-[clamp(3.2rem,5.2vw,5.1rem)] font-semibold leading-[0.92] tracking-[-0.09em] text-[var(--color-text)]"
             />
           </div>
           <p className="mt-5 max-w-md text-sm leading-7 text-[var(--color-text-muted)] sm:text-[0.98rem]">
