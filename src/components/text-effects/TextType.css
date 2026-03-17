@@ -3,10 +3,17 @@
   white-space: pre-wrap;
 }
 
+.text-type__content {
+  display: inline;
+}
+
 .text-type__cursor {
-  margin-left: 0.25rem;
   display: inline-block;
+  width: 0;
+  overflow: visible;
+  transform: translateX(0.14em);
   opacity: 1;
+  pointer-events: none;
 }
 
 .text-type__cursor--hidden {

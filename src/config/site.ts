@@ -3,13 +3,12 @@ export const siteConfig = {
   shortName: "JB",
   role: "CTO, technical team leader, and mobile developer.",
   rotatingRoles: [
-    "Chief Technology Officer.",
-    "Software Engineer.",
-    "Optimistic Builder.",
-    "Thoughtful Collaborator.",
+    "Chief\nTechnology\nOfficer.",
+    "Software\nEngineer.",
+    "Optimistic\nBuilder.",
+    "Thoughtful\nCollaborator.",
   ],
-  description:
-    "Full-stack builder focused on web and mobile products using Next.js, React Native, Flutter, and modern backend tooling.",
+  description: "My Digital Business Card",
   location: "Antipolo City, Philippines",
   availability: "Open to selected freelance and product work",
   email: "joerelbelen.dev@gmail.com",

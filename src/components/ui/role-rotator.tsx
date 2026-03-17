@@ -30,14 +30,6 @@ export function RoleRotator({ phrases, className = "" }: RoleRotatorProps) {
     () => safePhrases.map((phrase) => buildEncryptedText(phrase)),
     [safePhrases],
   );
-  const longestPhrase = useMemo(
-    () =>
-      safePhrases.reduce(
-        (longest, phrase) => (phrase.length > longest.length ? phrase : longest),
-        safePhrases[0] ?? "",
-      ),
-    [safePhrases],
-  );
   const [activeIndex, setActiveIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("intro");
   const [pausedEncryptedText, setPausedEncryptedText] = useState("");
@@ -200,9 +192,13 @@ export function RoleRotator({ phrases, className = "" }: RoleRotatorProps) {
 
   return (
     <div className={`relative ${className}`}>
-      <span aria-hidden="true" className="invisible block whitespace-pre-line">
-        {longestPhrase}
-      </span>
+      <div aria-hidden="true" className="invisible grid">
+        {safePhrases.map((phrase) => (
+          <span key={phrase} className="col-start-1 row-start-1 block whitespace-pre-line">
+            {phrase}
+          </span>
+        ))}
+      </div>
       <div className="absolute inset-0 flex items-center">
         {content}
       </div>
