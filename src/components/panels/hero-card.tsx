@@ -95,13 +95,13 @@ export function HeroCard() {
           <header className="flex items-center justify-between gap-6">
             <Monogram />
             <nav aria-label="Primary">
-              <ul className="flex items-center gap-4 text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-black/55 md:gap-8">
+              <ul className="flex items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-black/55 md:gap-4">
                 {homePanels.map((item, index) => (
                   <li key={item.label}>
                     <button
                       type="button"
                       onClick={() => goTo(index)}
-                      className={`transition-opacity hover:opacity-100 ${
+                      className={`rounded-full px-3 py-2 transition-opacity hover:opacity-100 md:px-4 ${
                         activeIndex === index ? "opacity-100 text-black" : "opacity-55"
                       }`}
                       aria-pressed={activeIndex === index}

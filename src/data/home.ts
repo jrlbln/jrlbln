@@ -52,7 +52,7 @@ export const homePanels = [
     eyebrow: "Education and proof",
     title: "Academic distinction, technical growth, and supporting credentials.",
     description:
-      "Your resume and CV point to strong academic performance, including Cum Laude recognition and high GWA marks. This section is the right place for education, certificates, references, and downloadable documents, with modal views for fuller detail.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
     cta: {
       kind: "link",
       label: "Download CV",
