@@ -143,7 +143,9 @@ void main() {
           float flakeSizeRatio = uFlakeSize / flakeSize;
           float intensity = exp2(-(t + toIntersection) * invDepthFade) *
                            min(1.0, flakeSizeRatio * flakeSizeRatio) * uBrightness;
-          gl_FragColor = vec4(uColor * pow(vec3(intensity), vec3(uGamma)), 1.0);
+          float glow = max(pow(intensity, uGamma), 0.46);
+          vec3 glowColor = min(uColor * (0.95 + glow * 0.4), vec3(1.0));
+          gl_FragColor = vec4(glowColor, glow);
           return;
         }
       }

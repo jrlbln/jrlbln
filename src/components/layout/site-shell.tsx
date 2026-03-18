@@ -11,12 +11,12 @@ export function SiteShell({ children }: SiteShellProps) {
       <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[min(98vh,920px)] w-[max(100vw,1500px)] -translate-x-1/2 -translate-y-1/2">
         <PixelSnow
           className="h-full w-full"
-          color="#111111"
+          color="#ee9db0"
           flakeSize={0.018}
           minFlakeSize={1.6}
           pixelResolution={200}
           speed={1.4}
-          density={0.12}
+          density={0.2}
           direction={125}
           brightness={1.15}
           depthFade={3.2}
