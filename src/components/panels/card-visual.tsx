@@ -1,3 +1,5 @@
+import { Mail, MapPin, Phone } from "lucide-react";
+
 type CardVisualProps = {
   variant: "sculpture" | "statement" | "selected" | "contact";
 };
@@ -35,15 +37,35 @@ export function CardVisual({ variant }: CardVisualProps) {
     return (
       <div className="relative mx-auto flex aspect-square w-full max-w-[320px] items-center justify-center md:max-w-[460px]">
         <div className="absolute left-1/2 top-1/2 z-0 h-[56%] w-[56%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-black/8 bg-[radial-gradient(circle,rgba(255,255,255,0.96),rgba(239,239,239,0.7),transparent_76%)] animate-pulse-soft" />
-        <div className="absolute left-1/2 top-1/2 z-10 flex h-[62%] w-[72%] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[2rem] border border-black/12 bg-[rgba(255,255,255,0.78)] shadow-[0_18px_36px_rgba(0,0,0,0.06)] backdrop-blur">
-          <div className="text-center">
-            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.34em] text-black/38">
+        <div className="absolute left-1/2 top-1/2 z-10 flex h-[66%] w-[76%] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[2rem] border border-black/12 bg-[rgba(255,255,255,0.82)] px-7 py-8 shadow-[0_18px_36px_rgba(0,0,0,0.06)] backdrop-blur">
+          <div className="w-full">
+            <p className="text-[0.62rem] font-semibold uppercase tracking-[0.3em] text-black/38">
               contact
             </p>
-            <p className="mt-5 text-4xl font-semibold tracking-[-0.08em] text-black">
-              Let&apos;s build
+            <p className="mt-3 text-center text-3xl font-semibold tracking-[-0.06em] text-black md:text-[2.05rem]">
+              Let&apos;s connect
             </p>
-            <p className="mt-3 text-sm text-black/48">Focused, quiet, intentional.</p>
+            <p className="mt-2 text-center text-sm text-black/48">Open to meaningful collaboration.</p>
+            <div className="mt-6 space-y-3">
+              <a
+                href="mailto:joerelbelen.dev@gmail.com"
+                className="flex items-center gap-3 px-1 py-1 text-[0.96rem] font-medium text-black/75 transition-colors hover:text-black"
+              >
+                <Mail className="h-4 w-4 shrink-0 text-black/55" />
+                <span>joerelbelen.dev@gmail.com</span>
+              </a>
+              <a
+                href="tel:+639914279044"
+                className="flex items-center gap-3 px-1 py-1 text-[0.96rem] font-medium text-black/75 transition-colors hover:text-black"
+              >
+                <Phone className="h-4 w-4 shrink-0 text-black/55" />
+                <span>+63 9914279044</span>
+              </a>
+              <div className="flex items-center gap-3 px-1 py-1 text-[0.96rem] font-medium text-black/75">
+                <MapPin className="h-4 w-4 shrink-0 text-black/55" />
+                <span>Antipolo, Rizal, Philippines</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -11,7 +11,7 @@ export function SiteShell({ children }: SiteShellProps) {
       <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[min(98vh,920px)] w-[max(100vw,1500px)] -translate-x-1/2 -translate-y-1/2">
         <PixelSnow
           className="h-full w-full"
-          color="#ee9db0"
+          color="#f4c1cf"
           flakeSize={0.018}
           minFlakeSize={1.6}
           pixelResolution={200}

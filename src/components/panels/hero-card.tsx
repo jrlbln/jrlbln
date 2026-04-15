@@ -11,7 +11,12 @@ import { CredentialsPanel } from "@/components/sections/credentials-panel";
 export function HeroCard() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0, glareX: 50, glareY: 18 });
+  const [tilt, setTilt] = useState({
+    rotateX: 0,
+    rotateY: 0,
+    glareX: 50,
+    glareY: 18,
+  });
 
   function goTo(index: number) {
     setActiveIndex(index);
@@ -69,19 +74,16 @@ export function HeroCard() {
 
   return (
     <div
-      className="relative w-full max-w-[1180px] [perspective:2400px]"
+      className="relative w-full max-w-[1180px] perspective-[2400px]"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="pointer-events-none absolute inset-x-[4%] top-8 bottom-[-2.5rem] rounded-[2.3rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.45),rgba(210,210,210,0.22))] shadow-[0_55px_120px_rgba(0,0,0,0.1)] blur-2xl" />
-      <div className="pointer-events-none absolute inset-x-[1.1rem] inset-y-[1rem] rounded-[2.15rem] border border-white/65 bg-[linear-gradient(180deg,rgba(255,255,255,0.52),rgba(236,236,236,0.34))] shadow-[inset_0_1px_0_rgba(255,255,255,0.96),inset_0_-1px_0_rgba(0,0,0,0.06)] md:[transform:translate3d(0,10px,-1px)]" />
+      <div className="pointer-events-none absolute inset-x-[4%] top-8 -bottom-10 rounded-[2.3rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.45),rgba(210,210,210,0.22))] shadow-[0_55px_120px_rgba(0,0,0,0.1)] blur-2xl" />
+      <div className="pointer-events-none absolute inset-x-[1.1rem] inset-y-4 rounded-[2.15rem] border border-white/65 bg-[linear-gradient(180deg,rgba(255,255,255,0.52),rgba(236,236,236,0.34))] shadow-[inset_0_1px_0_rgba(255,255,255,0.96),inset_0_-1px_0_rgba(0,0,0,0.06)] md:transform-[translate3d(0,10px,-1px)]" />
       <section
-        className="relative w-full overflow-hidden rounded-[2rem] border border-[rgba(17,17,17,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(250,250,250,0.88))] px-6 py-6 shadow-[0_18px_40px_rgba(255,255,255,0.7)_inset,0_-18px_30px_rgba(0,0,0,0.035)_inset,0_26px_80px_rgba(0,0,0,0.09)] [transform-style:preserve-3d] transition-transform duration-200 ease-out md:px-10 md:py-7"
+        className="relative w-full overflow-hidden rounded-[2rem] border border-[rgba(17,17,17,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(250,250,250,0.88))] px-6 py-6 shadow-[0_18px_40px_rgba(255,255,255,0.7)_inset,0_-18px_30px_rgba(0,0,0,0.035)_inset,0_26px_80px_rgba(0,0,0,0.09)] transform-3d transition-transform duration-200 ease-out md:px-10 md:py-7"
         style={{
-          transform:
-            typeof window !== "undefined" && window.innerWidth >= 768
-              ? `rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`
-              : undefined,
+          transform: `rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
         }}
       >
         <div
@@ -102,7 +104,9 @@ export function HeroCard() {
                       type="button"
                       onClick={() => goTo(index)}
                       className={`rounded-full px-3 py-2 transition-opacity hover:opacity-100 md:px-4 ${
-                        activeIndex === index ? "opacity-100 text-black" : "opacity-55"
+                        activeIndex === index
+                          ? "opacity-100 text-black"
+                          : "opacity-55"
                       }`}
                       aria-pressed={activeIndex === index}
                     >
@@ -117,7 +121,9 @@ export function HeroCard() {
           <div
             className="relative flex-1 overflow-hidden py-6 md:py-2"
             onTouchStart={(event) => handleTouchStart(event.touches[0].clientX)}
-            onTouchEnd={(event) => handleTouchEnd(event.changedTouches[0].clientX)}
+            onTouchEnd={(event) =>
+              handleTouchEnd(event.changedTouches[0].clientX)
+            }
           >
             <div
               className="flex h-full transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"

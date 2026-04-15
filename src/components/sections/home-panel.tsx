@@ -24,10 +24,10 @@ export function HomePanel({ onGoToPanel }: HomePanelProps) {
           <div className="flex min-h-[200px] items-center md:min-h-[220px]">
             <RoleRotator
               phrases={siteConfig.rotatingRoles}
-              className="w-[11.75ch] text-[clamp(3.2rem,5.2vw,5.1rem)] font-semibold leading-[0.92] tracking-[-0.09em] text-[var(--color-text)]"
+              className="w-[11.75ch] text-[clamp(3.2rem,5.2vw,5.1rem)] font-semibold leading-[0.92] tracking-[-0.09em] text-foreground"
             />
           </div>
-          <p className="mt-5 max-w-md text-sm leading-7 text-[var(--color-text-muted)] sm:text-[0.98rem]">
+          <p className="mt-5 max-w-md text-sm leading-7 text-(--color-text-muted) sm:text-[0.98rem]">
             {panel.description}
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -54,7 +54,10 @@ export function HomePanel({ onGoToPanel }: HomePanelProps) {
                     rel="noreferrer"
                   >
                     <span>{link.label}</span>
-                    <span aria-hidden="true" className="text-[0.55rem] leading-none text-black/38">
+                    <span
+                      aria-hidden="true"
+                      className="text-[0.55rem] leading-none text-black/38"
+                    >
                       ↗
                     </span>
                   </a>

@@ -4,10 +4,12 @@ import { useCallback, useEffect, useMemo, useRef, type CSSProperties } from "rea
 import {
   Color,
   Mesh,
+  NoToneMapping,
   OrthographicCamera,
   PlaneGeometry,
   Scene,
   ShaderMaterial,
+  SRGBColorSpace,
   Vector2,
   Vector3,
   WebGLRenderer,
@@ -140,12 +142,10 @@ void main() {
         }
 
         if (dist < flakeSize) {
-          float flakeSizeRatio = uFlakeSize / flakeSize;
-          float intensity = exp2(-(t + toIntersection) * invDepthFade) *
-                           min(1.0, flakeSizeRatio * flakeSizeRatio) * uBrightness;
-          float glow = max(pow(intensity, uGamma), 0.46);
-          vec3 glowColor = min(uColor * (0.95 + glow * 0.4), vec3(1.0));
-          gl_FragColor = vec4(glowColor, glow);
+          // Keep all flakes the same tint regardless of depth/layer.
+          float colorScale = max(pow(uBrightness, uGamma), 0.001);
+          vec3 flakeColor = min(uColor * colorScale, vec3(1.0));
+          gl_FragColor = vec4(flakeColor, 1.0);
           return;
         }
       }
@@ -269,12 +269,14 @@ export function PixelSnow({
     const renderer = new WebGLRenderer({
       antialias: false,
       alpha: true,
-      premultipliedAlpha: false,
+      premultipliedAlpha: true,
       powerPreference: "high-performance",
       stencil: false,
       depth: false,
     });
 
+    renderer.outputColorSpace = SRGBColorSpace;
+    renderer.toneMapping = NoToneMapping;
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(container.offsetWidth, container.offsetHeight);
     renderer.setClearColor(0x000000, 0);
@@ -301,6 +303,8 @@ export function PixelSnow({
         uDirection: { value: (direction * Math.PI) / 180 },
       },
       transparent: true,
+      depthWrite: false,
+      toneMapped: false,
     });
     materialRef.current = material;
 

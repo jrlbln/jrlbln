@@ -25,11 +25,11 @@ export function WorkPanel() {
         </p>
         <div className="flex flex-1 flex-col">
           <div className="flex min-h-[176px] items-start lg:min-h-[190px] xl:min-h-[174px] 2xl:min-h-[166px]">
-            <h1 className="max-w-[15ch] text-[clamp(2.55rem,4vw,4.05rem)] font-semibold leading-[0.9] tracking-[-0.09em] text-[var(--color-text)]">
+            <h1 className="max-w-[15ch] text-[clamp(2.55rem,4vw,4.05rem)] font-semibold leading-[0.9] tracking-[-0.09em] text-foreground">
               {panel.title}
             </h1>
           </div>
-          <p className="mt-4 max-w-md text-sm leading-6 text-[var(--color-text-muted)] sm:text-[0.94rem] xl:leading-[1.65]">
+          <p className="mt-4 max-w-md text-sm leading-6 text-(--color-text-muted) sm:text-[0.94rem] xl:leading-[1.65]">
             {panel.description}
           </p>
         </div>
@@ -37,7 +37,10 @@ export function WorkPanel() {
         <div className="mt-auto pt-4 xl:pt-3">
           <ul className="flex flex-wrap items-end gap-3 pl-2 xl:gap-2.5">
             {workStackIcons.map((item) => (
-              <li key={item.label} className="group relative flex flex-col items-center">
+              <li
+                key={item.label}
+                className="group relative flex flex-col items-center"
+              >
                 <span className="pointer-events-none absolute bottom-full mb-3 rounded-full border border-black/10 bg-white px-3 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-black/56 opacity-0 transition-all duration-200 group-hover:-translate-y-1 group-hover:opacity-100">
                   {item.label}
                 </span>
@@ -50,7 +53,7 @@ export function WorkPanel() {
                     className={
                       item.label === "Convex"
                         ? "h-8 w-8 object-contain grayscale xl:h-7 xl:w-7"
-                        : "h-5 w-5 object-contain grayscale xl:h-[1.125rem] xl:w-[1.125rem]"
+                        : "h-5 w-5 object-contain grayscale xl:h-4.5 xl:w-4.5"
                     }
                   />
                 </span>

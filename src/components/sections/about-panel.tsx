@@ -7,17 +7,14 @@ export function AboutPanel() {
 
   return (
     <PanelFrame className="items-center">
-      <div className="max-w-xl flex h-full flex-col">
-        <p className="mb-3 text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-black/45">
-          {panel.eyebrow}
-        </p>
+      <div className="max-w-2xl flex h-full flex-col">
         <div className="flex flex-1 flex-col">
           <div className="flex min-h-[220px] items-start">
-            <h1 className="max-w-[15ch] text-[clamp(2.8rem,4.4vw,4.3rem)] font-semibold leading-[0.92] tracking-[-0.08em] text-[var(--color-text)]">
+            <h1 className="max-w-[19ch] text-[clamp(2.8rem,4.4vw,4.3rem)] font-semibold leading-[0.92] tracking-[-0.08em] text-foreground">
               {panel.title}
             </h1>
           </div>
-          <p className="mt-5 max-w-md text-sm leading-7 text-[var(--color-text-muted)] sm:text-[0.98rem]">
+          <p className="mt-5 max-w-xl text-justify text-sm leading-7 text-(--color-text-muted) sm:text-[0.98rem]">
             {panel.description}
           </p>
         </div>
