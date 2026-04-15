@@ -61,20 +61,20 @@ export function RoleRotator({ phrases, className = "" }: RoleRotatorProps) {
     }
 
     const pauseTimer = setTimeout(() => {
-      const encryptedSnapshot = pausedEncryptedText || encryptedPhrases[activeIndex] || "";
+      const encryptedSnapshot = pausedEncryptedText || currentEncrypted;
       setDecryptedDisplayText(encryptedSnapshot);
       setPhase("decrypt");
     }, INTRO_PAUSE_MS);
 
     return () => clearTimeout(pauseTimer);
-  }, [phase, pausedEncryptedText, encryptedPhrases, activeIndex]);
+  }, [phase, pausedEncryptedText, currentEncrypted]);
 
   useEffect(() => {
     if (phase !== "decrypt") {
       return;
     }
 
-    const encryptedText = pausedEncryptedText || encryptedPhrases[activeIndex] || "";
+    const encryptedText = pausedEncryptedText || currentEncrypted;
     const revealOrder = currentPhraseCharacters(encryptedText).filter(
       ({ char }) => !/\s/.test(char),
     );
@@ -100,7 +100,7 @@ export function RoleRotator({ phrases, className = "" }: RoleRotatorProps) {
     }, DECRYPT_SPEED_MS);
 
     return () => clearInterval(decryptTimer);
-  }, [phase, pausedEncryptedText, encryptedPhrases, activeIndex, currentPhrase]);
+  }, [phase, pausedEncryptedText, currentEncrypted, currentPhrase]);
 
   if (safePhrases.length === 0) {
     return null;
