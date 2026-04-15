@@ -34,7 +34,6 @@ export function RoleRotator({ phrases, className = "" }: RoleRotatorProps) {
   const [phase, setPhase] = useState<Phase>("intro");
   const [pausedEncryptedText, setPausedEncryptedText] = useState("");
   const [decryptedDisplayText, setDecryptedDisplayText] = useState("");
-  const [revealedIndices, setRevealedIndices] = useState<Set<number>>(new Set());
   const currentPhrase = safePhrases[activeIndex] ?? "";
   const currentEncrypted = encryptedPhrases[activeIndex] ?? "";
   const nextIndex = safePhrases.length === 0 ? 0 : (activeIndex + 1) % safePhrases.length;
@@ -54,7 +53,7 @@ export function RoleRotator({ phrases, className = "" }: RoleRotatorProps) {
     }, HOLD_DURATION_MS);
 
     return () => clearTimeout(holdTimer);
-  }, [phase]);
+  }, [phase, safePhrases.length]);
 
   useEffect(() => {
     if (phase !== "pause") {
@@ -62,11 +61,13 @@ export function RoleRotator({ phrases, className = "" }: RoleRotatorProps) {
     }
 
     const pauseTimer = setTimeout(() => {
+      const encryptedSnapshot = pausedEncryptedText || encryptedPhrases[activeIndex] || "";
+      setDecryptedDisplayText(encryptedSnapshot);
       setPhase("decrypt");
     }, INTRO_PAUSE_MS);
 
     return () => clearTimeout(pauseTimer);
-  }, [phase]);
+  }, [phase, pausedEncryptedText, encryptedPhrases, activeIndex]);
 
   useEffect(() => {
     if (phase !== "decrypt") {
@@ -77,9 +78,6 @@ export function RoleRotator({ phrases, className = "" }: RoleRotatorProps) {
     const revealOrder = currentPhraseCharacters(encryptedText).filter(
       ({ char }) => !/\s/.test(char),
     );
-
-    setDecryptedDisplayText(encryptedText);
-    setRevealedIndices(new Set());
 
     let revealPointer = 0;
 
@@ -93,17 +91,11 @@ export function RoleRotator({ phrases, className = "" }: RoleRotatorProps) {
       }
 
       setDecryptedDisplayText((previous) => {
-        const nextChars = previous.split("");
+        const baseText = previous || encryptedText;
+        const nextChars = baseText.split("");
         nextChars[nextItem.index] = currentPhrase[nextItem.index];
         return nextChars.join("");
       });
-
-      setRevealedIndices((previous) => {
-        const next = new Set(previous);
-        next.add(nextItem.index);
-        return next;
-      });
-
       revealPointer += 1;
     }, DECRYPT_SPEED_MS);
 
@@ -132,6 +124,7 @@ export function RoleRotator({ phrases, className = "" }: RoleRotatorProps) {
           onSentenceComplete={() => {}}
           onTypingComplete={() => {
             setPausedEncryptedText(currentEncrypted);
+            setDecryptedDisplayText("");
             setPhase("pause");
           }}
           onDeletingComplete={() => {}}
@@ -165,6 +158,7 @@ export function RoleRotator({ phrases, className = "" }: RoleRotatorProps) {
             if (textIndex === 1) {
               setActiveIndex(nextIndex);
               setPausedEncryptedText(nextEncrypted);
+              setDecryptedDisplayText("");
               setPhase("pause");
             }
           }}
